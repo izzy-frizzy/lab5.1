@@ -31,8 +31,12 @@ cart.addEventListener("click", (event) => {
   if (event.target.innerText.includes("remove")) {
     let item = event.target.closest("li");
     let price = parseFloat(item.dataset.price);
-    console.log(updateTotalPrice(-price));
+    let index = parseFloat(item.dataset.index);
+
+    shoppingCart.splice(index, 1);
+    updateTotalPrice(-price);
     item.remove();
+    showCart();
   }
 });
 // Function to update the total price
@@ -50,6 +54,8 @@ function showCart() {
 
     cartItem.innerText = `item: ${shoppingCart[i].item}, Price: ${shoppingCart[i].price} `;
 
+    //adds index to the li
+    cartItem.dataset.index = i;
     //added price value to the li
     cartItem.dataset.price = shoppingCart[i].price;
     //remove button on li
