@@ -31,7 +31,12 @@ if (item === "" || price === "") {
 
 cart.addEventListener("click", (event)=>{
     if (event.target.innerText.includes("remove")) {
-        removeItem(event.target);
+        
+        let item = event.target.closest("li")
+        let price = parseFloat(item.dataset.price);
+        console.log(Number(updateTotalPrice(-price)))
+        item.remove();
+        
     }
 
 });
@@ -42,12 +47,12 @@ function updateTotalPrice(amount) {
 }
  
 // Function to remove an item
-function removeItem(event) {
-  const item = event.target.closest('li');
-  const price = parseFloat(item.dataset.price);
-  updateTotalPrice(-price);
-  item.remove();
-}
+// function removeItem(event) {
+//   const item = event.target.closest('li');
+//   const price = parseFloat(item.dataset.price);
+//   updateTotalPrice(-price);
+//   item.remove();
+// }
 
 // Function to show cart
 function showCart() {
@@ -57,6 +62,8 @@ function showCart() {
     let cartItem = document.createElement("li");
     // console.log(taskList[i]);
     cartItem.innerText = `item: ${shoppingCart[i].item}, Price: ${shoppingCart[i].price} `;
+
+    cartItem.dataset.price = shoppingCart[i].price;
     //remove button
     let deleteButton = document.createElement("button");
     deleteButton.type = "button";
