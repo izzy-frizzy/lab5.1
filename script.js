@@ -15,10 +15,19 @@ addProductButton.addEventListener("click", () => {
     price,
   };
 
-  if (item === "" || price === "") {
+  if (item === "" || price === "" ) {
     alert("Please enter a product or price!");
+    productNameInput.value = "";
+    productPriceInput.value = "";
     return;
   }
+  else if(price <= 0){
+    alert("Please enter a valid price");
+    productNameInput.value = "";
+    productPriceInput.value = "";
+    return;
+  }
+
   shoppingCart.push(product);
   updateTotalPrice(price);
   showCart();
@@ -35,7 +44,6 @@ cart.addEventListener("click", (event) => {
 
     shoppingCart.splice(index, 1);
     updateTotalPrice(-price);
-    item.remove();
     showCart();
   }
 });
