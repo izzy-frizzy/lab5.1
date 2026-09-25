@@ -10,10 +10,12 @@ let shoppingCart = [];
 
 addProductButton.addEventListener("click", ()=> {
     let item = productNameInput.value;
-    let price = productPriceInput.value;
+    let price = Number(productPriceInput.value);
     let product = {
         item,price
     }
+    console.log(price);
+    console.log(typeof price)
 if (item === "" || price === "") {
     alert("Please enter a product or price!");
     return;
@@ -21,18 +23,20 @@ if (item === "" || price === "") {
     let cartList = document.createElement("li");
     cartList.innerText = product
 
-    shoppingCart.push(product)
+    shoppingCart.push(product);
     console.log(shoppingCart);
-    // updateTotalPrice(price)
+    updateTotalPrice(price)
 
-
-    item.value = "";
-    price.value = "";
+    productNameInput.value = "";
+    productPriceInput.value = "";
 });
 // Function to update the total price
 function updateTotalPrice(amount) {
   totalPrice += amount;
   totalPriceSpan.textContent = totalPrice.toFixed(2);
+}
+function render(){
+    
 }
  
 // Function to remove an item
